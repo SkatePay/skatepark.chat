@@ -1,0 +1,14 @@
+{
+    "applinks": {
+      "apps": [],
+      "details": [
+        {
+          "appID": "SJ92P833ND.ninja.skate.SkateConnect",
+          "paths": [ 
+            "/video/*", 
+            "/channel/*" 
+        ]
+        }
+      ]
+    }
+  }
