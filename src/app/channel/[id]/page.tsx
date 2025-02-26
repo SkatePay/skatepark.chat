@@ -20,7 +20,7 @@ const ChannelPage = ({ params }: ChannelPageProps) => {
     if (id) {
       // Fetch the channel details from your API using the 'id'
       const baseUrl =
-        process.env.NEXT_PUBLIC_API_URL || "https://api.skatepark.chat";
+        process.env.NEXT_PUBLIC_API_URL ?? "https://api.skatepark.chat";
 
       fetch(`${baseUrl}/channel/${id}`)
         .then((response) => response.json())
