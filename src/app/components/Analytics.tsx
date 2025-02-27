@@ -4,7 +4,7 @@ const Analytics = () => {
   if (!process.env.GOOGLE_ANALYTICS_ID) {
     return null;
   }
-  return <GoogleAnalytics gaId="G-1BJKFRMP12" />;
+  return <GoogleAnalytics gaId={process.env.GOOGLE_ANALYTICS_ID} />;
 };
 
 export default Analytics;
