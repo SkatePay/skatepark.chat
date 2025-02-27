@@ -1,12 +1,12 @@
 import Chat from "@/app/components/Chat"; // Import Chat component
 import Link from "next/link"; // Import Next.js Link component
 
-interface ChannelPageProps {
-  params: { id: string };
+interface Props {
+  params: Promise<{ id: string }>;
 }
 
-const ChatPage = ({ params }: ChannelPageProps) => {
-  const { id } = params;
+export default async function Page({ params }: Readonly<Props>) {
+  const { id } = await params;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -17,16 +17,8 @@ const ChatPage = ({ params }: ChannelPageProps) => {
       >
         ← Go Home
       </Link>
-
-      {/* Page Title */}
-      <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-        Skate Connect Chat #{id}
-      </h1>
-
       {/* Chat Component */}
-      <Chat />
+      <Chat channelId={id} />
     </div>
   );
-};
-
-export default ChatPage;
+}

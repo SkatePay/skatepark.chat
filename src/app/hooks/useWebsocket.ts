@@ -1,42 +1,74 @@
 import { useState, useEffect } from "react";
 
-export default function useWebSocket(url: string) {
+export default function useWebSocket(url: string, channelId: string) {
   const [messages, setMessages] = useState<{ text: string }[]>([]);
   const [socket, setSocket] = useState<WebSocket | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
 
-  useEffect(() => {
+  const connectWebSocket = (newChannelId: string) => {
+    setError(null); // Reset error state
+    setIsConnected(false); // Hide chat until connected
+
+    if (socket) {
+      socket.close(); // Fully close existing WebSocket
+    }
+
     const ws = new WebSocket(url);
 
-    ws.onopen = () => console.log("Connected to WebSocket");
+    ws.onopen = () => {
+      console.log("✅ Connected to WebSocket");
+      setIsConnected(true);
+      setError(null);
+
+      // Subscribe to selected channel
+      ws.send(JSON.stringify({ type: "subscribe", channelId: newChannelId }));
+    };
+
     ws.onmessage = (event) => {
       try {
-        if (!event.data) return; // Ignore empty messages
+        const parsedMessage = JSON.parse(event.data);
+        console.log("📥 Received WebSocket message:", parsedMessage);
 
-        const parsedMessage = JSON.parse(event.data); // Ensure it's valid JSON
-        console.log("Received:", parsedMessage);
-
-        if (parsedMessage.text) {
-          setMessages((prev) => [...prev, parsedMessage]);
+        // Check if the message contains `content`
+        if (parsedMessage.content) {
+          setMessages((prev) => [...prev, { text: parsedMessage.content }]);
+          console.log("✅ Added to messages:", parsedMessage.content);
+        } else {
+          console.warn(
+            "⚠️ Unexpected message format (missing `content`):",
+            parsedMessage
+          );
         }
-      } catch (error) {
-        console.error("Invalid JSON received:", event.data);
+      } catch (err) {
+        console.error("⚠️ Invalid JSON received:", event.data);
       }
     };
 
-    ws.onerror = (error) => console.error("WebSocket error:", error);
-    ws.onclose = () => console.log("WebSocket closed");
+    ws.onerror = () => {
+      setError("WebSocket connection failed");
+    };
+
+    ws.onclose = () => {
+      setIsConnected(false);
+      setError("Disconnected from WebSocket");
+    };
 
     setSocket(ws);
+  };
 
-    return () => ws.close(); // Cleanup on unmount
-  }, [url]);
+  // Initial connection
+  useEffect(() => {
+    connectWebSocket(channelId);
+  }, [url, channelId]);
 
   const sendMessage = (message: string) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
-      const messageObj = { text: message }; // Send structured JSON
-      socket.send(JSON.stringify(messageObj));
+      socket.send(JSON.stringify({ text: message }));
+    } else {
+      setError("Unable to send message: WebSocket is disconnected");
     }
   };
 
-  return { messages, sendMessage };
+  return { messages, sendMessage, error, isConnected, connectWebSocket };
 }
