@@ -64,7 +64,9 @@ export default function useWebSocket(url: string, channelId: string) {
 
   const sendMessage = (message: string) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify({ text: message }));
+      socket.send(
+        JSON.stringify({ type: "message", text: message, channelId })
+      );
     } else {
       setError("Unable to send message: WebSocket is disconnected");
     }
