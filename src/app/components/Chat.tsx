@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import useWebSocket from "@/app/hooks/useWebsocket";
+import useWebSocket, { Message } from "@/app/hooks/useWebsocket";
 
 interface Channel {
   name: string;
@@ -112,21 +112,12 @@ export default function Chat({ channelId }: Readonly<ChatProps>) {
         {messages.length === 0 ? (
           <p className="text-center text-gray-500">No messages yet...</p>
         ) : (
-          messages.map((msg, index) => {
+          messages.map((msg: Message, index: number) => {
             console.log("🔹 Rendering message:", msg);
 
-            let text = "";
-            if (typeof msg === "string") {
-              text = msg;
-            } else if (msg && typeof msg === "object") {
-              if ("content" in msg) {
-                text = msg.content;
-              } else if ("text" in msg) {
-                text = msg.text;
-              }
-            }
-
-            if (!text) {
+            // Ensure message has valid content
+            const content = msg?.content || "";
+            if (!content) {
               console.warn("⚠️ Unexpected message format:", msg);
               return null;
             }
@@ -146,7 +137,7 @@ export default function Chat({ channelId }: Readonly<ChatProps>) {
                   whiteSpace: "pre-wrap", // Preserves spaces and new lines
                 }}
               >
-                {text}
+                {content}
               </div>
             );
           })

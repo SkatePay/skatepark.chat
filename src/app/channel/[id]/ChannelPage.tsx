@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 interface Video {
   id: string;
@@ -45,9 +46,11 @@ export default function ChannelPage({ id, videos }: Readonly<Props>) {
             <div key={video.id} style={styles.videoContainer}>
               <Link href={`/video/${videoId}`}>
                 <div style={styles.thumbnailContainer}>
-                  <img
+                  <Image
                     src={thumbnailUrl}
                     alt="Video thumbnail"
+                    width={320} // Set an appropriate width
+                    height={180} // Set an appropriate height
                     style={styles.thumbnail}
                     onError={(e) => {
                       const img = e.target as HTMLImageElement;
