@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  skatepark-chat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: skatepark-chat
+    restart: unless-stopped
+    env_file:
+      - .env
+    command: ["npm", "start"] 
+    volumes:
+      - ./logs/skatepark-chat:/app/logs
+    ports:
+      - "3002:3002"
