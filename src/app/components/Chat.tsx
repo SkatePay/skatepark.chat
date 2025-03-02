@@ -19,7 +19,7 @@ export default function Chat({ channelId }: Readonly<ChatProps>) {
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const socketUrl =
-    process.env.NEXT_PUBLIC_WS_URL ?? "ws://api.skatepark.chat/ws";
+    process.env.NEXT_PUBLIC_WS_URL ?? "wss://api.skatepark.chat/ws";
   const baseUrl =
     process.env.NEXT_PUBLIC_API_URL ?? "https://api.skatepark.chat";
 
