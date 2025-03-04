@@ -1,6 +1,5 @@
 import Chat from "@/app/components/Chat"; // Import Chat component
 import Footer from "@/app/components/Footer";
-import Link from "next/link"; // Import Next.js Link component
 
 interface Props {
   params: Promise<{ id: string }>;
