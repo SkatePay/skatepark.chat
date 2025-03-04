@@ -3,7 +3,7 @@ const nextConfig = {
     env: {
         NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
         NEXT_PUBLIC_WS_URL: process.env.NEXT_PUBLIC_WS_URL,
-        NEXT_CHANNEL_ID: process.env.CHANNEL_ID
+        NEXT_PUBLIC_CHANNEL_ID: process.env.NEXT_PUBLIC_CHANNEL_ID
     },
     images: {
         remotePatterns: [

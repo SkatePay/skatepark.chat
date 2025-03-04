@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface Channel {
   name: string;
   channelId: string;
@@ -20,7 +22,7 @@ export default function ChannelSelector({
         htmlFor="channel"
         className="block text-sm font-medium text-gray-700 dark:text-gray-300"
       >
-        Select Channel:
+        Select Channel <Link href={`/channel/${selectedChannel}`}>🎥</Link>:
       </label>
       <select
         name="channel"

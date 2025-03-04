@@ -14,6 +14,50 @@ interface Props {
 }
 
 export default function ChannelPage({ id, videos }: Readonly<Props>) {
+  const videoSection = (
+    <div style={styles.grid}>
+      {videos.map((video) => {
+        let videoUrl;
+        try {
+          videoUrl = JSON.parse(video.content).content;
+        } catch (error) {
+          console.error(error, video.content);
+          return null;
+        }
+
+        const videoId = videoUrl.split("/").pop()?.replace(".mov", "");
+        const thumbnailUrl = `https://skateconnect.s3.us-west-2.amazonaws.com/${videoId}.jpg`;
+
+        return (
+          <div key={video.id} style={styles.videoContainer}>
+            <Link href={`/video/${videoId}`}>
+              <div style={styles.thumbnailContainer}>
+                <Image
+                  src={thumbnailUrl}
+                  alt="Video thumbnail"
+                  width={320} // Set an appropriate width
+                  height={180} // Set an appropriate height
+                  style={styles.thumbnail}
+                  onError={(e) => {
+                    const img = e.target as HTMLImageElement;
+                    img.style.display = "none";
+                    const fallback = img.nextSibling as HTMLDivElement;
+                    fallback.style.display = "flex";
+                  }}
+                />
+                <div style={{ ...styles.fallback, display: "none" }}>
+                  🏁 No thumbnail
+                </div>
+              </div>
+            </Link>
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  const notFoundSection = <div style={styles.noVideos}>No videos found.</div>;
+
   return (
     <div>
       <h1
@@ -26,48 +70,21 @@ export default function ChannelPage({ id, videos }: Readonly<Props>) {
           textOverflow: "ellipsis",
         }}
       >
-        SkateConnect Channel #{id}
+        <Link
+          href="/"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
+          SkateConnect
+        </Link>{" "}
+        Channel #{id}{" "}
+        <Link
+          href={`/chat/${id}`}
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
+          💬
+        </Link>
       </h1>
-      <div style={styles.grid}>
-        {!videos.length && <div>No videos found.</div>}
-        {videos.map((video) => {
-          let videoUrl;
-          try {
-            videoUrl = JSON.parse(video.content).content;
-          } catch (error) {
-            console.error(error, video.content);
-            return null;
-          }
-
-          const videoId = videoUrl.split("/").pop()?.replace(".mov", "");
-          const thumbnailUrl = `https://skateconnect.s3.us-west-2.amazonaws.com/${videoId}.jpg`;
-
-          return (
-            <div key={video.id} style={styles.videoContainer}>
-              <Link href={`/video/${videoId}`}>
-                <div style={styles.thumbnailContainer}>
-                  <Image
-                    src={thumbnailUrl}
-                    alt="Video thumbnail"
-                    width={320} // Set an appropriate width
-                    height={180} // Set an appropriate height
-                    style={styles.thumbnail}
-                    onError={(e) => {
-                      const img = e.target as HTMLImageElement;
-                      img.style.display = "none";
-                      const fallback = img.nextSibling as HTMLDivElement;
-                      fallback.style.display = "flex";
-                    }}
-                  />
-                  <div style={{ ...styles.fallback, display: "none" }}>
-                    🏁 No thumbnail
-                  </div>
-                </div>
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+      {!videos.length ? notFoundSection : videoSection}
     </div>
   );
 }
@@ -78,6 +95,22 @@ const styles: { [key: string]: React.CSSProperties } = {
     gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
     gap: "20px",
     padding: "20px",
+  },
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: "100vh", // Ensures full viewport height
+    textAlign: "center",
+  },
+  noVideos: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%", // Ensures full width
+    height: "50vh", // Keeps vertical centering
+    textAlign: "center",
   },
   videoContainer: {
     borderRadius: "10px",

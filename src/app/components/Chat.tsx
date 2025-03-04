@@ -6,6 +6,7 @@ import ChannelSelector from "./ChannelSelector";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
 import WebSocketError from "./WebSocketError";
+import Link from "next/link";
 
 interface Channel {
   name: string;
@@ -61,7 +62,13 @@ export default function Chat({ channelId }: Readonly<ChatProps>) {
   return (
     <div className="flex flex-col items-center p-6 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-lg w-full max-w-md">
       <h1 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-        Skatepark Chat 💬
+        <Link
+          href="/"
+          className="text-blue-600 dark:text-blue-400 hover:underline"
+        >
+          SkateConnect
+        </Link>{" "}
+        Chat 💬
       </h1>
 
       <ChannelSelector

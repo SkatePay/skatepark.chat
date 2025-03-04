@@ -1,4 +1,4 @@
-# [skatepark.chat](https://skatepark.chat)
+# [skateconnect](https://skatepark.chat)
 
 ## Getting Started
 

@@ -1,3 +1,4 @@
+import Footer from "@/app/components/Footer";
 import ChannelPage from "./ChannelPage";
 
 interface Props {
@@ -19,5 +20,10 @@ export default async function Page({ params }: Readonly<Props>) {
       video.tags?.some((tag) => tag[0] === "t" && tag[1] === "video")
     ) ?? [];
 
-  return <ChannelPage id={id} videos={filteredVideos} />;
+  return (
+    <>
+      <ChannelPage id={id} videos={filteredVideos} />
+      <Footer />
+    </>
+  );
 }

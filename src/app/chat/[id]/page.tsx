@@ -1,4 +1,5 @@
 import Chat from "@/app/components/Chat"; // Import Chat component
+import Footer from "@/app/components/Footer";
 import Link from "next/link"; // Import Next.js Link component
 
 interface Props {
@@ -10,15 +11,8 @@ export default async function Page({ params }: Readonly<Props>) {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      {/* Home Link */}
-      <Link
-        href="/"
-        className="absolute top-6 left-6 text-blue-600 dark:text-blue-400 hover:underline"
-      >
-        ← Go Home
-      </Link>
-      {/* Chat Component */}
       <Chat channelId={id} />
+      <Footer />
     </div>
   );
 }
