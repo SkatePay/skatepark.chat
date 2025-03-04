@@ -61,7 +61,7 @@ export default function Chat({ channelId }: Readonly<ChatProps>) {
   return (
     <div className="flex flex-col items-center p-6 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-lg w-full max-w-md">
       <h1 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-        HypeWizard Chat 💬
+        Skatepark Chat 💬
       </h1>
 
       <ChannelSelector
@@ -83,7 +83,7 @@ export default function Chat({ channelId }: Readonly<ChatProps>) {
         input={input}
         setInput={setInput}
         onSend={handleSend}
-        onHype={() => sendMessage("@hype https://hypewizard.com")}
+        onHype={() => sendMessage("@hype https://skatepark.chat")}
       />
     </div>
   );
