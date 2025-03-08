@@ -20,3 +20,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 docker build -t landing-page .
 docker run -p 3000:3000 landing-page
 ```
+
+## References
+- [skatepay](https://github.com/SkatePay/skatepay) - [MIT License, Copyright (c) 2025 SKATEPAY.CHAT](https://github.com/SkatePay/skatepay/blob/main/LICENSE)

@@ -6,7 +6,8 @@
           "appID": "SJ92P833ND.ninja.skate.SkateConnect",
           "paths": [ 
             "/video/*", 
-            "/channel/*" 
+            "/channel/*",
+            "/user/*"
         ]
         }
       ]
