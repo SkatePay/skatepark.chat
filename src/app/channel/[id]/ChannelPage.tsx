@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import QRCodeGenerator from "./components/QRCodeGenerator";
 
 interface Video {
   id: string;
@@ -84,6 +85,7 @@ export default function ChannelPage({ id, videos }: Readonly<Props>) {
           💬
         </Link>
       </h1>
+      <QRCodeGenerator />
       {!videos.length ? notFoundSection : videoSection}
     </div>
   );

@@ -13,6 +13,7 @@
     "dayjs": "^1.11.13",
     "js-cookie": "^3.0.5",
     "next": "^15.1.7",
+    "qrcode.react": "^4.2.0",
     "react": "^18",
     "react-dom": "^18"
   },
