@@ -133,7 +133,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     flex: 1,
     width: '100%',
     maxWidth: '1400px', // Prevents excessive stretching
-    margin: '0 auto', // Centers content horizontally
+    margin: '0 auto',
   },
 
   container: {
@@ -176,15 +176,16 @@ const styles: { [key: string]: React.CSSProperties } = {
     marginBottom: '20px',
   },
 
-  // ✅ **Fixed Grid (Prevents Stacking Issues)**
+  // ✅ **Fix Grid Centering for Single Video**
   grid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', // **Ensures videos spread properly**
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', // Allows single videos to center
     gap: '20px',
     padding: '20px',
     width: '100%',
     maxWidth: '1400px', // Prevents stretching
-    justifyContent: 'center', // **Ensures videos align correctly**
+    justifyContent: 'center', // Ensures even alignment
+    placeItems: 'center', // Centers single video properly
   },
 
   noVideos: {
@@ -216,8 +217,8 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 
   fallback: {
-    width: '100%',
-    height: '100px',
+    height: '320px',
+    width: '180px',
     display: 'none',
     alignItems: 'center',
     justifyContent: 'center',
