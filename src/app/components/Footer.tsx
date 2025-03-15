@@ -1,9 +1,9 @@
 export default function Footer() {
-  const channelId = process.env.NEXT_PUBLIC_CHANNEL_ID;
+  const channelId = process.env.NEXT_PUBLIC_CHANNEL_ID
 
   return (
-    <footer className="row-start-3 flex flex-col gap-2 items-center justify-center text-center">
-      <div className="flex gap-6 flex-wrap items-center justify-center">
+    <footer className="row-start-3 flex flex-col items-center justify-center gap-2 text-center">
+      <div className="flex flex-wrap items-center justify-center gap-6">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href={`/chat/${channelId}`}
@@ -25,5 +25,5 @@ export default function Footer() {
         © {new Date().getFullYear()} SkateConnect. All rights reserved.
       </p>
     </footer>
-  );
+  )
 }

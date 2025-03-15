@@ -22,4 +22,5 @@ docker run -p 3000:3000 landing-page
 ```
 
 ## References
+
 - [skatepay](https://github.com/SkatePay/skatepay) - [MIT License, Copyright (c) 2025 SKATEPAY.CHAT](https://github.com/SkatePay/skatepay/blob/main/LICENSE)

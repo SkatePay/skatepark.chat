@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   skatepark:
@@ -9,8 +9,8 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    command: ["npm", "start"] 
+    command: ['npm', 'start']
     volumes:
       - ./logs/skatepark:/app/logs
     ports:
-      - "3002:3002"
+      - '3002:3002'
