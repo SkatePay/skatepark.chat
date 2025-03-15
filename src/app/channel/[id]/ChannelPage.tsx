@@ -32,6 +32,9 @@ export default function ChannelPage({ id, videos, metadata, about }: Readonly<Pr
       <div style={styles.container}>
         {/* Header */}
         <div style={styles.channelHeader}>
+          <Link href={`/chat/${id}`} className="text-blue-600 hover:underline dark:text-blue-400">
+            💬
+          </Link>
           <Link href="/" className="text-blue-600 hover:underline dark:text-blue-400">
             SkateConnect
           </Link>{' '}
