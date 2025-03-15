@@ -14,7 +14,7 @@ export default async function Page({ params }: Readonly<Props>) {
   const data = await response.json()
 
   // ✅ Extract and parse metadata
-  const metadata: Metadata | undefined = data.meta?.length > 0 ? data.meta[0] : undefined
+  const metadata: Metadata | undefined = data.metadata?.length > 0 ? data.metadata[0] : undefined
 
   let parsedContent: MetadataContent = {}
   let aboutData: AboutStructure | undefined
