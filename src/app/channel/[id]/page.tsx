@@ -13,8 +13,20 @@ export default async function Page({ params }: Readonly<Props>) {
   const response = await fetch(`${baseUrl}/channel/${id}`)
   const data = await response.json()
 
+  const parseMetadata = (): Metadata | undefined => {
+    if (data.metadata?.length > 1) {
+      return data.metadata[1]
+    }
+
+    if (data.metadata?.length > 0) {
+      return data.metadata[0]
+    }
+
+    return undefined
+  }
+
   // ✅ Extract and parse metadata
-  const metadata: Metadata | undefined = data.metadata?.length > 0 ? data.metadata[0] : undefined
+  const metadata: Metadata | undefined = parseMetadata()
 
   let parsedContent: MetadataContent = {}
   let aboutData: AboutStructure | undefined
