@@ -1,6 +1,7 @@
 import Footer from '@/app/components/Footer'
 import ChannelPage from './ChannelPage'
-import { AboutStructure, Metadata, MetadataContent, Video } from './types'
+import { AboutStructure, MetadataContent, Video } from './types'
+import { redirect } from 'next/navigation'
 
 interface Props {
   params: Promise<{ id: string }>
@@ -13,34 +14,22 @@ export default async function Page({ params }: Readonly<Props>) {
   const response = await fetch(`${baseUrl}/channel/${id}`)
   const data = await response.json()
 
-  const parseMetadata = (): Metadata | undefined => {
-    if (data.metadata?.length > 1) {
-      return data.metadata[1]
-    }
-
-    if (data.metadata?.length > 0) {
-      return data.metadata[0]
-    }
-
-    return undefined
-  }
-
   // ✅ Extract and parse metadata
-  const metadata: Metadata | undefined = parseMetadata()
+  const metadata: MetadataContent | undefined = data.metadata
 
-  let parsedContent: MetadataContent = {}
   let aboutData: AboutStructure | undefined
 
   if (metadata) {
     try {
-      parsedContent = JSON.parse(metadata.content) as MetadataContent
       aboutData =
-        typeof parsedContent.about === 'string'
-          ? (JSON.parse(parsedContent.about) as AboutStructure)
-          : (parsedContent.about ?? undefined)
+        typeof metadata.about === 'string'
+          ? (JSON.parse(metadata.about) as AboutStructure)
+          : (metadata.about ?? undefined)
     } catch (error) {
       console.error('❌ Failed to parse metadata content:', error)
     }
+  } else {
+    redirect('/')
   }
 
   // ✅ Filter videos with tag "video"

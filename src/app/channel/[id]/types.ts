@@ -4,16 +4,6 @@ export interface Video {
   tags?: [string, string][]
 }
 
-export interface Metadata {
-  kind: number
-  id: string
-  pubkey: string
-  created_at: number
-  tags: [string, string][]
-  content: string // JSON-encoded metadata
-  sig: string
-}
-
 export interface AboutStructure {
   location?: {
     longitude: number

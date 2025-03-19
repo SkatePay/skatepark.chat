@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import QRCodeGenerator from './components/QRCodeGenerator'
-import { AboutStructure, Metadata } from './types'
+import { AboutStructure, MetadataContent } from './types'
 import { ClipboardIcon } from '@heroicons/react/24/solid'
 import toast from 'react-hot-toast'
 
@@ -15,12 +15,12 @@ interface Video {
 interface Props {
   id: string
   videos: Video[]
-  metadata?: Metadata
+  metadata?: MetadataContent
   about?: AboutStructure
 }
 
 export default function ChannelPage({ id, videos, metadata, about }: Readonly<Props>) {
-  const channelName = metadata?.content ? JSON.parse(metadata.content).name : `Channel #${id}`
+  const channelName = metadata ? metadata.name : `Channel #${id}`
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text)
