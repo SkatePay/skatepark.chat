@@ -10,7 +10,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          👀 Channels
+          👀 Chat
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
