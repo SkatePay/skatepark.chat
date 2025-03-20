@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import QRCodeGenerator from './components/QRCodeGenerator'
 import { AboutStructure, MetadataContent } from './types'
-import { ClipboardIcon } from '@heroicons/react/24/solid'
+import { ClipboardIcon, PlusCircleIcon } from '@heroicons/react/24/solid'
 import toast from 'react-hot-toast'
 
 interface Video {
@@ -27,42 +27,61 @@ export default function ChannelPage({ id, videos, metadata, about }: Readonly<Pr
     toast.success('Copied to clipboard!')
   }
 
+  const formatCoordinate = (coord: number | undefined) => {
+    if (coord === undefined) return 'N/A'
+    return coord.toFixed(6)
+  }
+
   return (
-    <div style={styles.page}>
-      <div style={styles.container}>
+    <div className="font-geist min-h-screen text-gray-800 dark:text-gray-200">
+      <div className="container mx-auto max-w-3xl p-6">
         {/* Header */}
-        <div style={styles.channelHeader}>
-          <Link href={`/chat/${id}`} className="text-blue-600 hover:underline dark:text-blue-400">
-            💬
+        <div className="mb-6 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Link href={`/chat/${id}`} className="text-blue-600 hover:underline dark:text-blue-400">
+              💬
+            </Link>
+            <Link href="/" className="text-blue-600 hover:underline dark:text-blue-400">
+              SkateConnect
+            </Link>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="font-semibold">{channelName}</span>
+            <button
+              onClick={() => handleCopy(id)}
+              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+            >
+              <ClipboardIcon className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Submit Spot Button */}
+        <div className="mb-8 text-center">
+          <Link href="/spot">
+            <button className="mx-auto flex items-center rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-8 py-4 font-semibold text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+              <PlusCircleIcon className="mr-2 h-6 w-6" />
+              Submit a Spot
+            </button>
           </Link>
-          <Link href="/" className="text-blue-600 hover:underline dark:text-blue-400">
-            SkateConnect
-          </Link>{' '}
-          {channelName}{' '}
-          <button
-            onClick={() => handleCopy(id)}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-            style={styles.copyButton}
-          >
-            <ClipboardIcon className="h-4 w-4" />
-          </button>
         </div>
 
         {/* Metadata */}
         {about && (
-          <div style={styles.aboutSection}>
+          <div className="mb-6 rounded-lg bg-white p-6 shadow dark:bg-gray-700">
             {about.location && (
-              <p>
-                📍 <strong>Location:</strong> {about.location.latitude}, {about.location.longitude}
+              <p className="mb-2">
+                📍 <strong>Location:</strong> {formatCoordinate(about.location.latitude)},{' '}
+                {formatCoordinate(about.location.longitude)}
               </p>
             )}
             {about.description && (
-              <p>
+              <p className="mb-2">
                 📜 <strong>Description:</strong> {about.description}
               </p>
             )}
             {about.note && (
-              <p>
+              <p className="mb-2">
                 📝 <strong>Note:</strong> {about.note}
               </p>
             )}
@@ -70,160 +89,55 @@ export default function ChannelPage({ id, videos, metadata, about }: Readonly<Pr
         )}
 
         {/* QR Code */}
-        <QRCodeGenerator />
+        <div className="mb-8">
+          <QRCodeGenerator />
+        </div>
 
         {/* Video Section */}
         {videos.length === 0 ? (
-          <div style={styles.noVideos}>No videos found.</div>
+          <div className="py-10 text-center">No videos found.</div>
         ) : (
-          <VideoGrid videos={videos} />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {videos.map((video) => {
+              let videoUrl
+              try {
+                videoUrl = JSON.parse(video.content).content
+              } catch (error) {
+                console.error(error, video.content)
+                return null
+              }
+
+              const videoId = videoUrl.split('/').pop()?.replace('.mov', '')
+              const thumbnailUrl = `https://skateconnect.s3.us-west-2.amazonaws.com/${videoId}.jpg`
+
+              return (
+                <div key={video.id} className="overflow-hidden rounded-lg shadow-md">
+                  <Link href={`/video/${videoId}`}>
+                    <div className="relative w-full">
+                      <Image
+                        src={thumbnailUrl}
+                        alt="Video thumbnail"
+                        width={320}
+                        height={180}
+                        className="h-auto w-full cursor-pointer object-cover transition-transform duration-200"
+                        onError={(e) => {
+                          const img = e.target as HTMLImageElement
+                          img.style.display = 'none'
+                          const fallback = img.nextSibling as HTMLDivElement
+                          fallback.style.display = 'flex'
+                        }}
+                      />
+                      <div className="hidden h-[320px] w-[180px] items-center justify-center bg-[#eee] text-sm text-[#555]">
+                        🏁 No thumbnail
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              )
+            })}
+          </div>
         )}
       </div>
     </div>
   )
-}
-
-function VideoGrid({ videos }: Readonly<{ videos: Video[] }>) {
-  return (
-    <div style={styles.grid}>
-      {videos.map((video) => {
-        let videoUrl
-        try {
-          videoUrl = JSON.parse(video.content).content
-        } catch (error) {
-          console.error(error, video.content)
-          return null
-        }
-
-        const videoId = videoUrl.split('/').pop()?.replace('.mov', '')
-        const thumbnailUrl = `https://skateconnect.s3.us-west-2.amazonaws.com/${videoId}.jpg`
-
-        return (
-          <div key={video.id} style={styles.videoContainer}>
-            <Link href={`/video/${videoId}`}>
-              <div style={styles.thumbnailContainer}>
-                <Image
-                  src={thumbnailUrl}
-                  alt="Video thumbnail"
-                  width={320}
-                  height={180}
-                  style={styles.thumbnail}
-                  onError={(e) => {
-                    const img = e.target as HTMLImageElement
-                    img.style.display = 'none'
-                    const fallback = img.nextSibling as HTMLDivElement
-                    fallback.style.display = 'flex'
-                  }}
-                />
-                <div style={{ ...styles.fallback, display: 'none' }}>🏁 No thumbnail</div>
-              </div>
-            </Link>
-          </div>
-        )
-      })}
-    </div>
-  )
-}
-
-const styles: { [key: string]: React.CSSProperties } = {
-  page: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    flex: 1,
-    width: '100%',
-    maxWidth: '1400px', // Prevents excessive stretching
-    margin: '0 auto',
-  },
-
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexGrow: 1,
-    textAlign: 'center',
-    padding: '20px',
-    width: '100%',
-  },
-
-  channelHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '8px',
-    fontSize: '20px',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-
-  copyButton: {
-    cursor: 'pointer',
-    background: 'none',
-    border: 'none',
-    padding: '5px',
-    display: 'flex',
-    alignItems: 'center',
-  },
-
-  aboutSection: {
-    background: '#222',
-    color: '#ddd',
-    padding: '12px 20px',
-    borderRadius: '12px',
-    maxWidth: '600px',
-    textAlign: 'center',
-    marginBottom: '20px',
-  },
-
-  // ✅ **Fix Grid Centering for Single Video**
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', // Allows single videos to center
-    gap: '20px',
-    padding: '20px',
-    width: '100%',
-    maxWidth: '1400px', // Prevents stretching
-    justifyContent: 'center', // Ensures even alignment
-    placeItems: 'center', // Centers single video properly
-  },
-
-  noVideos: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '30vh',
-    textAlign: 'center',
-  },
-
-  videoContainer: {
-    borderRadius: '10px',
-    overflow: 'hidden',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-  },
-
-  thumbnail: {
-    width: '100%',
-    height: 'auto',
-    objectFit: 'cover',
-    cursor: 'pointer',
-    transition: 'transform 0.2s',
-  },
-
-  thumbnailContainer: {
-    position: 'relative',
-    width: '100%',
-  },
-
-  fallback: {
-    height: '320px',
-    width: '180px',
-    display: 'none',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: '#eee',
-    color: '#555',
-    fontSize: '14px',
-  },
 }

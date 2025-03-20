@@ -8,6 +8,15 @@ export default function Footer() {
       <div className="flex flex-wrap items-center justify-center gap-6">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href={`/token/DaEivka37g83C3QMokZmBsUNsAHoh1tm8HhKh8r4Cen5`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          🌕 Token
+        </a>
+
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href={`/chat/${channelId}`}
           target="_blank"
           rel="noopener noreferrer"
@@ -15,21 +24,7 @@ export default function Footer() {
           👀 Chat
         </a>
 
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href={`/token/DaEivka37g83C3QMokZmBsUNsAHoh1tm8HhKh8r4Cen5`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          🪙 Token
-        </a>
-
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href={`/channel/${channelId}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={`/channel/${channelId}`} target="_blank" rel="noopener noreferrer">
           Videos 📹
         </a>
       </div>

@@ -121,16 +121,7 @@ const SpotSubmissionForm = () => {
         >
           SkateConnect
         </Link>{' '}
-        community and earn{' '}
-        <Link
-          href={RABOTA_URL}
-          className="text-blue-400 hover:underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          $RABOTA
-        </Link>{' '}
-        rewards.
+        community and earn rewards.
       </p>
 
       {submissionStatus === 'success' && (
