@@ -33,8 +33,11 @@ export default function TokenPerksPage({ id }: Readonly<Props>) {
       </div>
 
       <h1>
-        <Link href="/" className="text-blue-600 hover:underline dark:text-blue-400">
-          SkateConnect
+        <Link
+          href={`https://prorobot.ai/token/${id}`}
+          className="text-blue-600 hover:underline dark:text-blue-400"
+        >
+          $RABOTA
         </Link>{' '}
         Token Perks
       </h1>
@@ -45,15 +48,6 @@ export default function TokenPerksPage({ id }: Readonly<Props>) {
         <p>
           Our token provides exclusive benefits such as discounted transactions, priority access to
           events, and more. Check out these screenshots showcasing seamless transactions:
-        </p>
-
-        <p>
-          <Link
-            href={`https://prorobot.ai/token/${id}`}
-            className="text-blue-600 hover:underline dark:text-blue-400"
-          >
-            More Information
-          </Link>{' '}
         </p>
         <div style={styles.screenshotGrid}>
           <div style={styles.screenshot}>
