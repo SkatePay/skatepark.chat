@@ -12,6 +12,16 @@ export default function Footer() {
         >
           👀 Chat
         </a>
+
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href={`/token/DaEivka37g83C3QMokZmBsUNsAHoh1tm8HhKh8r4Cen5`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          🪙 Token
+        </a>
+
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href={`/channel/${channelId}`}
