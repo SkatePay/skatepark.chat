@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Footer from './components/Footer'
+import Link from 'next/link' // Import Link
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
             <Image
               src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
               alt="Download on the App Store"
-              width={150} // Adjust size if needed
+              width={150}
               height={50}
               priority
             />
@@ -33,6 +34,13 @@ export default function Home() {
             Read our docs
           </a>
         </div>
+
+        {/* Add the Link component here */}
+        <Link href="/spot">
+          <button className="transform rounded-full bg-gradient-to-r from-green-500 to-teal-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-600 hover:to-teal-600">
+            Submit a Spot
+          </button>
+        </Link>
       </main>
       <Footer />
     </div>

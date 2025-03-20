@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Footer() {
   const channelId = process.env.NEXT_PUBLIC_CHANNEL_ID
 
@@ -32,7 +34,7 @@ export default function Footer() {
         </a>
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-400">
-        © {new Date().getFullYear()} SkateConnect. All rights reserved.
+        © {new Date().getFullYear()} <Link href="/">SkateConnect</Link>. All rights reserved.
       </p>
     </footer>
   )

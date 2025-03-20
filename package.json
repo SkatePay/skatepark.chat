@@ -10,10 +10,11 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-    "@next/third-parties": "^15.1.7",
+    "@next/third-parties": "^15.2.3",
+    "axios": "^1.8.4",
     "dayjs": "^1.11.13",
     "js-cookie": "^3.0.5",
-    "next": "^15.1.7",
+    "next": "^15.2.3",
     "qrcode.react": "^4.2.0",
     "react": "^18",
     "react-dom": "^18",
