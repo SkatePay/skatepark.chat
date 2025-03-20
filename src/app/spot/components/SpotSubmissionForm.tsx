@@ -23,8 +23,8 @@ const RABOTA_URL =
 const SpotSubmissionForm = () => {
   const [skateConnectId, setSkateConnectId] = useState('')
   const [channelId, setChannelId] = useState('')
-  const [description, setDescription] = useState('')
   const [solanaAddress, setSolanaAddress] = useState('')
+  const [description, setDescription] = useState('')
   const [instagram, setInstagram] = useState('')
   const [reddit, setReddit] = useState('')
   const [x, setX] = useState('')
@@ -52,7 +52,7 @@ const SpotSubmissionForm = () => {
         setErrorMessage('Channel ID is required.')
         return
       }
-      if (solanaAddress && !isValidSolanaAddress(solanaAddress)) {
+      if (!solanaAddress || !isValidSolanaAddress(solanaAddress)) {
         setSubmissionStatus('error')
         setErrorMessage('Invalid Solana address.')
         return
@@ -67,8 +67,8 @@ const SpotSubmissionForm = () => {
           body: JSON.stringify({
             skateConnectId,
             channelId,
-            description,
             solanaAddress,
+            description,
             instagram,
             reddit,
             x,
@@ -82,8 +82,8 @@ const SpotSubmissionForm = () => {
           setSubmissionStatus('success')
           setSkateConnectId('')
           setChannelId('')
-          setDescription('')
           setSolanaAddress('')
+          setDescription('')
           setInstagram('')
           setReddit('')
           setX('')
@@ -94,29 +94,15 @@ const SpotSubmissionForm = () => {
           console.error('Failed to submit spot:', response.statusText, errorData)
           setSubmissionStatus('error')
           setErrorMessage(errorData.error || 'An unexpected error occurred.')
+          return
         }
       } catch (error) {
         console.error('Error submitting spot:', error)
         setSubmissionStatus('error')
         setErrorMessage('Failed to connect to the server. Please try again.')
-      } finally {
-        if (submissionStatus !== 'success') {
-          setSubmissionStatus('error')
-        }
       }
     },
-    [
-      skateConnectId,
-      channelId,
-      solanaAddress,
-      description,
-      instagram,
-      reddit,
-      x,
-      tiktok,
-      telegram,
-      submissionStatus,
-    ]
+    [skateConnectId, channelId, solanaAddress, description, instagram, reddit, x, tiktok, telegram]
   )
 
   return (
@@ -215,22 +201,8 @@ const SpotSubmissionForm = () => {
         </div>
 
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-300">
-            Description (Optional)
-          </label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={3}
-            className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-white shadow-sm transition-colors duration-300 placeholder:text-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-opacity-50"
-            placeholder="Describe the spot..."
-          />
-        </div>
-
-        <div>
           <label htmlFor="solanaAddress" className="block text-sm font-medium text-gray-300">
-            Solana Address (Optional)
+            Solana Address
           </label>
           <input
             type="text"
@@ -239,6 +211,7 @@ const SpotSubmissionForm = () => {
             onChange={(e) => setSolanaAddress(e.target.value)}
             className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-800 px-3 text-white shadow-sm transition-colors duration-300 placeholder:text-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-opacity-50"
             placeholder="Your Solana wallet address"
+            required
           />
           <p className="mt-1 text-xs text-gray-500">
             If your spot is approved and added to the public list, the{' '}
@@ -252,6 +225,20 @@ const SpotSubmissionForm = () => {
             </Link>{' '}
             reward will be sent to this address.
           </p>
+        </div>
+
+        <div>
+          <label htmlFor="description" className="block text-sm font-medium text-gray-300">
+            Description (Optional)
+          </label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={3}
+            className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-white shadow-sm transition-colors duration-300 placeholder:text-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-opacity-50"
+            placeholder="Describe the spot..."
+          />
         </div>
 
         <div>
