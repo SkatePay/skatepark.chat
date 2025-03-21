@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
 
     // Construct the payload to send to the hub API
     const hubPayload = {
+      type: 'skateSpotSubmission',
       skateConnectId: body.skateConnectId,
       channelId: body.channelId,
       description: body.description || '',
