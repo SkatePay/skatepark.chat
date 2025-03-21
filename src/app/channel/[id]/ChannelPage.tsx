@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import QRCodeGenerator from './components/QRCodeGenerator'
 import { AboutStructure, MetadataContent } from './types'
-import { ClipboardIcon, PlusCircleIcon } from '@heroicons/react/24/solid'
+import { ClipboardIcon, FlagIcon } from '@heroicons/react/24/solid'
 import toast from 'react-hot-toast'
 
 interface Video {
@@ -56,12 +56,12 @@ export default function ChannelPage({ id, videos, metadata, about }: Readonly<Pr
           </div>
         </div>
 
-        {/* Submit Spot Button */}
+        {/* Publish Spot Button */}
         <div className="mb-8 text-center">
           <Link href="/spot">
             <button className="mx-auto flex items-center rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-8 py-4 font-semibold text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-              <PlusCircleIcon className="mr-2 h-6 w-6" />
-              Submit a Spot
+              <FlagIcon className="mr-2 h-6 w-6" />
+              Publish Your Spot
             </button>
           </Link>
         </div>

@@ -78,7 +78,7 @@ const SpotSubmissionForm = () => {
         })
 
         if (response.ok) {
-          console.log('Spot submitted successfully!')
+          console.log('Spot published successfully!')
           setSubmissionStatus('success')
           setSkateConnectId('')
           setChannelId('')
@@ -91,7 +91,7 @@ const SpotSubmissionForm = () => {
           setTelegram('')
         } else {
           const errorData = await response.json()
-          console.error('Failed to submit spot:', response.statusText, errorData)
+          console.error('Failed to publish spot:', response.statusText, errorData)
           setSubmissionStatus('error')
           setErrorMessage(errorData.error || 'An unexpected error occurred.')
           return
@@ -108,7 +108,7 @@ const SpotSubmissionForm = () => {
   return (
     <div className="w-full max-w-2xl">
       <h1 className="mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-center text-3xl font-bold text-transparent drop-shadow-lg md:mb-8 md:text-4xl">
-        Submit a Skate Spot 🛹
+        Publish your Skate Spot 🛹
       </h1>
 
       <p className="mb-4 text-center text-sm text-gray-400 md:mb-6 md:text-base">
@@ -132,7 +132,7 @@ const SpotSubmissionForm = () => {
 
       {submissionStatus === 'error' && (
         <div className="mb-4 rounded-md border border-red-200 bg-red-50 p-4 text-red-700">
-          Failed to submit spot. {errorMessage}
+          Failed to publish spot. {errorMessage}
         </div>
       )}
 
@@ -281,7 +281,7 @@ const SpotSubmissionForm = () => {
             className="inline-flex w-full justify-center rounded-md bg-gradient-to-r from-green-500 to-teal-500 px-6 py-3 text-sm font-medium text-white shadow-sm transition-colors duration-300 hover:from-green-600 hover:to-teal-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
             disabled={submissionStatus === 'loading'}
           >
-            {submissionStatus === 'loading' ? 'Submitting...' : 'Submit Spot for Reward'}
+            {submissionStatus === 'loading' ? 'Submitting...' : 'Publish your Spot'}
           </button>
         </div>
       </form>

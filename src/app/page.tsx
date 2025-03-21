@@ -38,7 +38,7 @@ export default function Home() {
         {/* Add the Link component here */}
         <Link href="/spot">
           <button className="transform rounded-full bg-gradient-to-r from-green-500 to-teal-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-600 hover:to-teal-600">
-            Submit a Spot
+            Publish your Spot
           </button>
         </Link>
       </main>
