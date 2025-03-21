@@ -49,7 +49,7 @@ const SpotSubmissionForm = () => {
       }
       if (!channelId) {
         setSubmissionStatus('error')
-        setErrorMessage('Channel ID is required.')
+        setErrorMessage('Spot ID is required.')
         return
       }
       if (!solanaAddress || !isValidSolanaAddress(solanaAddress)) {
@@ -166,7 +166,7 @@ const SpotSubmissionForm = () => {
 
         <div>
           <label htmlFor="channelId" className="block text-sm font-medium text-gray-300">
-            Channel ID
+            Spot ID
           </label>
           <input
             type="text"
@@ -174,7 +174,7 @@ const SpotSubmissionForm = () => {
             value={channelId}
             onChange={(e) => setChannelId(e.target.value)}
             className="mt-1 block w-full rounded-md border border-gray-700 bg-gray-800 px-3 text-white shadow-sm transition-colors duration-300 placeholder:text-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-opacity-50"
-            placeholder="Channel ID obtained after mapping the spot"
+            placeholder="Spot ID obtained in the app"
             required
           />
           <p className="mt-1 text-xs text-gray-500">
