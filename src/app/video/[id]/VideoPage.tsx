@@ -29,7 +29,7 @@ export default function VideoPage({ id }: Readonly<Props>) {
     description: `Skateboarding action at Venice Beach Skate Park. ${id}`,
     thumbnailUrl,
     contentUrl: videoUrl,
-    embedUrl: `https://skatepark.chat/video/${id}`,
+    embedUrl: `https://skateconnect.app/video/${id}`,
   }
 
   return (

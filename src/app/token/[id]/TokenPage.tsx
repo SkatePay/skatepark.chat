@@ -2,7 +2,7 @@
 
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
+import React from 'react'
 
 interface Props {
   id: string
@@ -14,20 +14,12 @@ const SKATECONNECT_URL =
 const RABOTA_URL =
   process.env.NEXT_RABOTA_URL ??
   'https://prorobot.ai/token/DaEivka37g83C3QMokZmBsUNsAHoh1tm8HhKh8r4Cen5'
+const YOUTUBE_VIDEO_ID = 'MsUf2i3YJKI' //  Use ONLY the video ID here.  Change this to the correct ID.
 
 export default function TokenPerksPage({ id }: Readonly<Props>) {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 to-black p-8 text-white">
-      {/* Animated Background Particles */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute h-full w-full animate-pulse opacity-20">
-          <div className="absolute left-1/4 top-1/4 h-4 w-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 blur-sm"></div>
-          <div className="absolute right-1/4 top-3/4 h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-yellow-500 blur-sm"></div>
-          <div className="absolute bottom-1/4 left-1/2 h-8 w-8 rounded-full bg-gradient-to-r from-green-500 to-teal-500 blur-sm"></div>
-        </div>
-      </div>
-
-      <div className="relative z-10">
+    <div className="relative min-h-screen overflow-hidden text-white">
+      <div className="relative z-10 p-8">
         <Head>
           <script
             type="application/ld+json"
@@ -44,8 +36,8 @@ export default function TokenPerksPage({ id }: Readonly<Props>) {
         </Head>
 
         {/* Dynamic Banner with SkateConnect Link */}
-        <div className="mb-8 flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-green-600 to-teal-600 py-4 text-center text-white shadow-md transition-transform hover:scale-105">
-          <p className="mr-2 text-lg font-semibold tracking-wide">
+        <div className="mb-8 flex w-full flex-col items-center justify-center rounded-lg bg-gradient-to-r from-green-600 to-teal-600 py-4 text-center text-white shadow-md transition-transform hover:scale-105 sm:flex-row">
+          <p className="mb-2 mr-2 text-lg font-semibold tracking-wide sm:mb-0">
             🛹 Power Up Your{' '}
             <Link
               href={SKATECONNECT_URL}
@@ -85,6 +77,29 @@ export default function TokenPerksPage({ id }: Readonly<Props>) {
             SkateConnect
           </Link>
         </h1>
+
+        {/* Video Embed Section */}
+        <div className="mx-auto mb-12 w-full max-w-2xl">
+          {/* Constrain overall width */}
+          {/* Video Container */}
+          <div className="relative mx-auto w-full" style={{ maxWidth: '320px' }}>
+            {/* Adjust maxWidth for portrait video */}
+            <div className="relative aspect-[9/16] overflow-hidden rounded-2xl shadow-xl">
+              {/* 9:16 aspect ratio for portrait */}
+              <iframe
+                className="absolute left-0 top-0 h-full w-full"
+                src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}`}
+                title="$RABOTA Token Explanation"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          </div>
+          {/* Description */}
+          <p className="mt-4 text-center text-lg text-gray-400">
+            Learn more about how $RABOTA works within the SkateConnect ecosystem.
+          </p>
+        </div>
 
         {/* Token Utility Section with Animated Cards */}
         <div className="mx-auto w-full max-w-6xl text-center">
@@ -232,93 +247,6 @@ export default function TokenPerksPage({ id }: Readonly<Props>) {
                 <p className="text-gray-400">{item.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Screenshots Section with Parallax Effect */}
-        <div className="mx-auto mt-20 w-full max-w-6xl text-center">
-          <h2 className="mb-6 text-4xl font-semibold text-gray-200">
-            See{' '}
-            <Link href={RABOTA_URL} className="text-blue-400 hover:underline">
-              $RABOTA
-            </Link>{' '}
-            in Action on{' '}
-            <Link
-              href={SKATECONNECT_URL}
-              className="text-blue-400 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              SkateConnect
-            </Link>
-          </h2>
-          <p className="mb-10 text-lg text-gray-400">
-            Explore how{' '}
-            <Link href={RABOTA_URL} className="text-blue-400 hover:underline">
-              $RABOTA
-            </Link>{' '}
-            enhances your experience within the{' '}
-            <Link
-              href={SKATECONNECT_URL}
-              className="text-blue-400 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              SkateConnect
-            </Link>{' '}
-            platform.
-          </p>
-          <div className="flex flex-wrap justify-center gap-8">
-            <div className="max-w-md transform transition-transform hover:scale-105">
-              <Image
-                src="/images/bank.png"
-                alt="Payment Request Flow on SkateConnect"
-                width={500}
-                height={300}
-                className="w-full rounded-2xl shadow-xl"
-              />
-              <p className="mt-3 text-gray-400">
-                Secure{' '}
-                <Link href={RABOTA_URL} className="text-blue-400 hover:underline">
-                  $RABOTA
-                </Link>{' '}
-                transactions within{' '}
-                <Link
-                  href={SKATECONNECT_URL}
-                  className="text-blue-400 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  SkateConnect
-                </Link>
-                .
-              </p>
-            </div>
-            <div className="max-w-md transform transition-transform hover:scale-105">
-              <Image
-                src="/images/wallet.png"
-                alt="Wallet Preview for SkateConnect"
-                width={500}
-                height={300}
-                className="w-full rounded-2xl shadow-xl"
-              />
-              <p className="mt-3 text-gray-400">
-                Earn{' '}
-                <Link href={RABOTA_URL} className="text-blue-400 hover:underline">
-                  $RABOTA
-                </Link>{' '}
-                rewards on{' '}
-                <Link
-                  href={SKATECONNECT_URL}
-                  className="text-blue-400 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  SkateConnect
-                </Link>
-                .
-              </p>
-            </div>
           </div>
         </div>
       </div>

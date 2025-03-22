@@ -19,7 +19,7 @@ export default function QRCodeGenerator() {
         level={'L'}
       />
 
-      <p className="mt-2 text-gray-500">Scan this QR code to visit the domain.</p>
+      <p className="mt-2 text-gray-500">Scan this QR code to visit this spot.</p>
     </div>
   )
 }

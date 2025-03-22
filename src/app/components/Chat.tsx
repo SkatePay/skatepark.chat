@@ -72,7 +72,7 @@ export default function Chat({ channelId }: Readonly<ChatProps>) {
         input={input}
         setInput={setInput}
         onSend={handleSend}
-        onHype={() => sendMessage('@hype https://skatepark.chat')}
+        onHype={() => sendMessage('@hype https://skateconnect.app')}
       />
     </div>
   )
