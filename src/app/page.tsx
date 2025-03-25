@@ -3,6 +3,8 @@ import Footer from './components/Footer'
 import Link from 'next/link' // Import Link
 
 export default function Home() {
+  const channelId = process.env.NEXT_PUBLIC_CHANNEL_ID
+
   return (
     <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
       <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
@@ -39,6 +41,13 @@ export default function Home() {
         <Link href="/spot">
           <button className="transform rounded-full bg-gradient-to-r from-green-500 to-teal-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-600 hover:to-teal-600">
             Publish your Spot
+          </button>
+        </Link>
+
+        {/* Browse Spots Button */}
+        <Link href={`/channel/${channelId}`}>
+          <button className="mx-auto flex items-center rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-8 py-4 font-semibold text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+            Browse Spots
           </button>
         </Link>
       </main>
