@@ -3,14 +3,14 @@ import SpotSubmissionForm from './components/SpotSubmissionForm'
 import Head from 'next/head'
 
 interface PageProps {
-  searchParams: {
+  searchParams: Promise<{
     npub?: string
     spot_id?: string
-  }
+  }>
 }
 
 export default async function Page({ searchParams }: Readonly<PageProps>) {
-  const { npub, spot_id } = searchParams
+  const { npub, spot_id } = await searchParams
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start bg-gradient-to-br from-gray-900 to-black p-4 text-white md:p-8">
