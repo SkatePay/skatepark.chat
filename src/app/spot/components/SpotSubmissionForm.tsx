@@ -20,9 +20,14 @@ const RABOTA_URL =
   process.env.NEXT_RABOTA_URL ??
   'https://prorobot.ai/token/DaEivka37g83C3QMokZmBsUNsAHoh1tm8HhKh8r4Cen5'
 
-const SpotSubmissionForm = () => {
-  const [skateConnectId, setSkateConnectId] = useState('')
-  const [channelId, setChannelId] = useState('')
+interface Props {
+  npub?: string
+  spotId?: string
+}
+
+const SpotSubmissionForm = ({ npub = '', spotId = '' }: Props) => {
+  const [skateConnectId, setSkateConnectId] = useState(npub)
+  const [channelId, setChannelId] = useState(spotId)
   const [solanaAddress, setSolanaAddress] = useState('')
   const [description, setDescription] = useState('')
   const [instagram, setInstagram] = useState('')
