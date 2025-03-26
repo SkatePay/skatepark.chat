@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Footer from './components/Footer'
-import Link from 'next/link' // Import Link
+import Link from 'next/link'
 
 export default function Home() {
   const channelId = process.env.NEXT_PUBLIC_CHANNEL_ID
@@ -37,19 +37,28 @@ export default function Home() {
           </a>
         </div>
 
-        {/* Add the Link component here */}
-        <Link href="/spot">
-          <button className="transform rounded-full bg-gradient-to-r from-green-500 to-teal-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-600 hover:to-teal-600">
-            Publish your Spot
-          </button>
-        </Link>
+        <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+          {/* Publish your Spot Button */}
+          <Link href="/spot">
+            <button className="transform rounded-full bg-gradient-to-r from-green-500 to-teal-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-600 hover:to-teal-600">
+              Publish your Spot
+            </button>
+          </Link>
 
-        {/* Browse Spots Button */}
-        <Link href={`/channel/${channelId}`}>
-          <button className="mx-auto flex items-center rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-8 py-4 font-semibold text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-            Browse Spots
-          </button>
-        </Link>
+          {/* Browse Spots Button */}
+          <Link href={`/channel/${channelId}`}>
+            <button className="transform rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-600 hover:to-indigo-700">
+              HQ
+            </button>
+          </Link>
+
+          {/* New Channels Button */}
+          <Link href="/channels">
+            <button className="transform rounded-full bg-gradient-to-r from-purple-500 to-pink-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-purple-600 hover:to-pink-700">
+              Channels 📹
+            </button>
+          </Link>
+        </div>
       </main>
       <Footer />
     </div>

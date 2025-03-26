@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import axios from 'axios'
 
+// GET /api/spots → Fetch list of channels from Go API
+export async function GET() {
+  try {
+    const response = await axios.get(`${process.env.HUB_API_URL}/spots`)
+    return NextResponse.json(response.data)
+  } catch (error) {
+    console.error('Error fetching spots from Go API:', error)
+    return NextResponse.json({ error: 'Failed to fetch spots' }, { status: 500 })
+  }
+}
+
 // POST /api/spots → Notify hub that there is a spot creation request
 export async function POST(req: NextRequest) {
   try {
