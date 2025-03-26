@@ -55,7 +55,7 @@ export default function Home() {
           {/* New Channels Button */}
           <Link href="/channels">
             <button className="transform rounded-full bg-gradient-to-r from-purple-500 to-pink-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-purple-600 hover:to-pink-700">
-              Channels 📹
+              Famous Spots 📹
             </button>
           </Link>
         </div>
