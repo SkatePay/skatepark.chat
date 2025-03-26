@@ -21,7 +21,6 @@ export default function VideoPage({ id }: Readonly<Props>) {
     return (
       <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 font-[family-name:var(--font-geist-sans)]">
         <div className="row-start-2">Loading video...</div>
-        <Footer />
       </div>
     )
   }
