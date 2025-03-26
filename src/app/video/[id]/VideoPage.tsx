@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Footer from '../../components/Footer'
 
 interface Props {
   id: string
@@ -77,8 +76,6 @@ export default function VideoPage({ id }: Readonly<Props>) {
           </button>
         </Link>
       </main>
-
-      <Footer />
     </div>
   )
 }
