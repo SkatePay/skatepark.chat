@@ -39,13 +39,13 @@ export default function Home() {
           {/* New Channels Button */}
           <Link href="/channels">
             <button className="transform rounded-full bg-gradient-to-r from-purple-500 to-pink-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-purple-600 hover:to-pink-700">
-              Published Spots 📹
+              ⭐️ Featured Spots
             </button>
           </Link>
           {/* Publish your Spot Button */}
           <Link href="/spot">
             <button className="transform rounded-full bg-gradient-to-r from-green-500 to-teal-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-600 hover:to-teal-600">
-              Publish your Spot
+              Publish your Spot 📹
             </button>
           </Link>
         </div>
