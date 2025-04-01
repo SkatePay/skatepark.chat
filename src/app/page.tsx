@@ -38,24 +38,16 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+          {/* New Channels Button */}
+          <Link href="/channels">
+            <button className="transform rounded-full bg-gradient-to-r from-purple-500 to-pink-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-purple-600 hover:to-pink-700">
+              Published Spots 📹
+            </button>
+          </Link>
           {/* Publish your Spot Button */}
           <Link href="/spot">
             <button className="transform rounded-full bg-gradient-to-r from-green-500 to-teal-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-green-600 hover:to-teal-600">
               Publish your Spot
-            </button>
-          </Link>
-
-          {/* Browse Spots Button */}
-          <Link href={`/channel/${channelId}`}>
-            <button className="transform rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-600 hover:to-indigo-700">
-              HQ
-            </button>
-          </Link>
-
-          {/* New Channels Button */}
-          <Link href="/channels">
-            <button className="transform rounded-full bg-gradient-to-r from-purple-500 to-pink-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-purple-600 hover:to-pink-700">
-              Famous Spots 📹
             </button>
           </Link>
         </div>

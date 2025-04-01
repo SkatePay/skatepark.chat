@@ -1,6 +1,6 @@
 import Footer from '@/app/components/Footer'
 import ChannelPage from './ChannelPage'
-import { AboutStructure, MetadataContent, Video } from './types'
+import { AboutStructure, MetadataContent, NostrEvent } from './types'
 import { redirect } from 'next/navigation'
 
 interface Props {
@@ -32,15 +32,17 @@ export default async function Page({ params }: Readonly<Props>) {
     redirect('/')
   }
 
+  const games: NostrEvent[] = data.games ?? []
+
   // ✅ Filter videos with tag "video"
-  const filteredVideos: Video[] =
-    data.videos?.filter((video: Video) =>
+  const videos: NostrEvent[] =
+    data.videos?.filter((video: NostrEvent) =>
       video.tags?.some((tag) => tag[0] === 't' && tag[1] === 'video')
     ) ?? []
 
   return (
     <>
-      <ChannelPage id={id} videos={filteredVideos} metadata={metadata} about={aboutData} />
+      <ChannelPage id={id} videos={videos} games={games} metadata={metadata} about={aboutData} />
       <Footer />
     </>
   )
