@@ -60,7 +60,7 @@ export default function Footer() {
         {/* Internal/App Links */}
         <a
           className="flex items-center gap-2 hover:text-gray-700 hover:underline hover:underline-offset-4 dark:hover:text-gray-300"
-          href={`/token/DaEivka37g83C3QMokZmBsUNsAHoh1tm8HhKh8r4Cen5`}
+          href={`/token`}
           target="_blank"
           rel="noopener noreferrer"
         >

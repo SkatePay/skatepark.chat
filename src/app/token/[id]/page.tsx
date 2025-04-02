@@ -1,5 +1,5 @@
 import Footer from '@/app/components/Footer'
-import TokenPage from './TokenPage'
+import TokenPage from '../components/TokenPage'
 
 interface Props {
   params: Promise<{ id: string }>
