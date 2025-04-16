@@ -7,6 +7,7 @@ const nextConfig = {
     NEXT_PUBLIC_DOWNLOAD_URL: process.env.NEXT_PUBLIC_DOWNLOAD_URL,
     NEXT_RABOTA_URL: process.env.NEXT_RABOTA_URL,
   },
+  output: 'standalone',
   images: {
     remotePatterns: [
       {
